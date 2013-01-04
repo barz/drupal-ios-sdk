@@ -1,5 +1,5 @@
-#define kDiosBaseUrl @"http://d7.workhabit.com"
-#define kDiosEndpoint @"test"
+#define kDiosBaseUrl @"http://drupal.rodenbusch.org/"
+#define kDiosEndpoint @"api"
 #define kDiosBaseNode @"node"
 #define kDiosBaseComment @"comment"
 #define kDiosBaseUser @"user"
