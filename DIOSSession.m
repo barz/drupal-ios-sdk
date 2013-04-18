@@ -251,11 +251,14 @@ realm, signRequests, threeLegged;
   NSData *body = [request HTTPBody];
   NSString *htttpBody = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
   NSArray *subComponents = [htttpBody componentsSeparatedByString:@"="];
+  [htttpBody release];
   if ([subComponents count] == 2) {
     [parameters setObject:[subComponents objectAtIndex:1] forKey:[subComponents objectAtIndex:0]];
   }
 
   NSString *allParameters = [self stringWithOAuthParameters:oauthParams requestParameters:parameters];
+  [parameters release];
+    
   // adding HTTP method and URL
   NSString *signatureBaseString = [NSString stringWithFormat:@"%@&%@&%@", [request.HTTPMethod uppercaseString], URLEncodeString(fixedURL), URLEncodeString(allParameters)];
 
@@ -284,7 +287,7 @@ realm, signRequests, threeLegged;
   NSString *timestamp = [NSString stringWithFormat:@"%d", epochTime];
   CFUUIDRef theUUID = CFUUIDCreate(NULL);
   CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-  NSString *nonce = (NSString *)string;
+  NSString *nonce = [(NSString *)string autorelease];
   CFRelease(theUUID);
 
   [dictionary setObject:nonce forKey:@"oauth_nonce"];
@@ -332,7 +335,7 @@ static NSString *URLEncodeString(NSString *string) {
   // Hyphen, Period, Understore & Tilde are expressly legal
   const CFStringRef legalURLCharactersToBeEscaped = CFSTR(":/=,!$&'()*+;[]@#?");
 
-  return ( NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ( CFStringRef)string, NULL, legalURLCharactersToBeEscaped, kCFStringEncodingUTF8);
+  return [( NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ( CFStringRef)string, NULL, legalURLCharactersToBeEscaped, kCFStringEncodingUTF8) autorelease];
 }
 @end
 // The function below was inspired on
@@ -382,5 +385,5 @@ static NSString * Base64EncodedStringFromData(NSData *data) {
     output[idx + 3] = (i + 2) < length ? kAFBase64EncodingTable[(value >> 0)  & 0x3F] : '=';
   }
 
-  return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
+  return [[[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding] autorelease];
 }
