@@ -47,6 +47,9 @@
   NSString *tokenIdentifier;
   NSString *tokenSecret;
 }
+
+@property (readwrite, nonatomic, strong) NSURL *baseURL;    // Hsoi 2013-04-18 - This is not right nor good, but Kyle's code is violating the readonly nature of things in all of his "shared session" class methods. Maybe in the past 'baseURL' was a readwrite attribute in AFHTTPClient and so this all worked. But now? Not so much. Frankly, that it's violating this really isn't good given how AFHTTPClient works. But... it's a HUGE beast that I'm unwilling to tackle to fix. It seems workable for now, so we'll just do this to keep the compiler quiet. *sigh*
+
 @property (strong, nonatomic) NSDictionary *user;
 @property (nonatomic, retain) NSMutableDictionary *accessTokens;
 @property (nonatomic) BOOL signRequests;
