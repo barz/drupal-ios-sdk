@@ -159,7 +159,7 @@
                parameters:(NSArray *)parameteres 
                  pageSize:(NSString *)pageSize  
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject)) success
-                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure; {
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
   NSMutableDictionary *userIndexDict = [NSMutableDictionary new];
   [userIndexDict setValue:page forKey:@"page"];
   [userIndexDict setValue:fields forKey:@"fields"];

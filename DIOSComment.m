@@ -108,7 +108,7 @@
 #pragma mark CommentDelete
 + (void)commentDelete:(NSDictionary *)comment
               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject)) success
-              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure; {
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
 
   NSString *path = [NSString stringWithFormat:@"%@/%@/%@", kDiosEndpoint, kDiosBaseComment, [comment objectForKey:@"cid"]];
 
@@ -146,7 +146,7 @@
 
 + (void)commentIndex:(NSDictionary *)params
              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject)) success
-             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure; {
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
 
   NSString *path = [NSString stringWithFormat:@"%@/%@", kDiosEndpoint, kDiosBaseComment];
 
