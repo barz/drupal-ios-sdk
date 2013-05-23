@@ -40,6 +40,8 @@
 #import "AFPropertyListRequestOperation.h"
 #include <sys/time.h>
 #import <CommonCrypto/CommonHMAC.h>
+#import "BZConfig.h"    // Hsoi 2013-05-23 - Added.
+
 static NSString* Base64EncodedStringFromData(NSData *data);
 static NSString* URLEncodeString(NSString *string);
 static const NSString *kOAuthSignatureMethodKey = @"oauth_signature_method";
@@ -66,7 +68,13 @@ realm, signRequests, threeLegged;
 
 + (DIOSSession *)sharedSession {
   dispatch_once(&once, ^ {
-    sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:kDiosBaseUrl]];
+      
+      // Hsoi 2013-05-23 - The DISOSession API hard-codes this use of kDiosBaseUrl. That's not too big a problem
+      // and for a lot of uses of this SDK it's probably fine. But for our dynamic, white-label platform, this
+      // doesn't work. So let's just call our config.
+    //sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:kDiosBaseUrl]];
+    sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:[BZConfig bestOfServer]]];
+      
     [sharedSession setParameterEncoding:AFJSONParameterEncoding];
   });
   return sharedSession;
