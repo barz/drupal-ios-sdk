@@ -130,6 +130,9 @@ realm, signRequests, threeLegged;
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
   NSURLRequest *request = [self signedRequestWithMethod:method path:path parameters:params];
 
+    NSLog(@"send signedrequest #######REQUEST######## :%@", request);
+    NSLog(@"params: %@", params);
+    
   AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
   [self enqueueHTTPRequestOperation:operation];
 }
@@ -295,7 +298,7 @@ realm, signRequests, threeLegged;
   NSString *timestamp = [NSString stringWithFormat:@"%d", epochTime];
   CFUUIDRef theUUID = CFUUIDCreate(NULL);
   CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-  NSString *nonce = [(NSString *)string autorelease];
+  NSString *nonce = (NSString *)CFBridgingRelease(string);
   CFRelease(theUUID);
 
   [dictionary setObject:nonce forKey:@"oauth_nonce"];
@@ -343,7 +346,7 @@ static NSString *URLEncodeString(NSString *string) {
   // Hyphen, Period, Understore & Tilde are expressly legal
   const CFStringRef legalURLCharactersToBeEscaped = CFSTR(":/=,!$&'()*+;[]@#?");
 
-  return [( NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ( CFStringRef)string, NULL, legalURLCharactersToBeEscaped, kCFStringEncodingUTF8) autorelease];
+  return ( NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, ( CFStringRef)string, NULL, legalURLCharactersToBeEscaped, kCFStringEncodingUTF8));
 }
 @end
 // The function below was inspired on
