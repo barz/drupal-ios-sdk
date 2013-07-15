@@ -262,13 +262,13 @@ realm, signRequests, threeLegged;
   NSData *body = [request HTTPBody];
   NSString *htttpBody = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
   NSArray *subComponents = [htttpBody componentsSeparatedByString:@"="];
-  [htttpBody release];
+  htttpBody = nil;
   if ([subComponents count] == 2) {
     [parameters setObject:[subComponents objectAtIndex:1] forKey:[subComponents objectAtIndex:0]];
   }
 
   NSString *allParameters = [self stringWithOAuthParameters:oauthParams requestParameters:parameters];
-  [parameters release];
+  parameters = nil;
     
   // adding HTTP method and URL
   NSString *signatureBaseString = [NSString stringWithFormat:@"%@&%@&%@", [request.HTTPMethod uppercaseString], URLEncodeString(fixedURL), URLEncodeString(allParameters)];
@@ -396,5 +396,5 @@ static NSString * Base64EncodedStringFromData(NSData *data) {
     output[idx + 3] = (i + 2) < length ? kAFBase64EncodingTable[(value >> 0)  & 0x3F] : '=';
   }
 
-  return [[[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding] autorelease];
+    return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }

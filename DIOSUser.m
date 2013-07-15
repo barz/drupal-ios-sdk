@@ -42,6 +42,7 @@
 @implementation DIOSUser
 
 static NSInteger anonymous_user = 0;
+static NSUInteger USERNAME_MAX_LENGTH = 60;
 
 #pragma mark UserGets
 + (void)userGet:(NSDictionary *)user
@@ -166,7 +167,7 @@ static NSInteger anonymous_user = 0;
                parameters:(NSArray *)parameteres
                  pageSize:(NSString *)pageSize
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject)) success
-                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure; {
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
     NSMutableDictionary *userIndexDict = [NSMutableDictionary new];
     [userIndexDict setValue:page forKey:@"page"];
     [userIndexDict setValue:fields forKey:@"fields"];
@@ -243,7 +244,7 @@ static NSInteger anonymous_user = 0;
          }
          else if(![[[responseDict objectForKey:@"user"]valueForKey:@"name"] isEqualToString:username]){
              [DIOSUser
-              userLogoutWithSuccessBlock:^(AFHTTPRequestOperation *op, id response) {
+              userLogoutWithSuccessBlock:^(AFHTTPRequestOperation *op2, id response2) {
                   [self userMakeSureUserIsLoggedInWithUsername:username andPassword:password success:success failure:failure];
               }
               failure:failure];
