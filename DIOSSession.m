@@ -73,7 +73,7 @@ realm, signRequests, threeLegged;
       // and for a lot of uses of this SDK it's probably fine. But for our dynamic, white-label platform, this
       // doesn't work. So let's just call our config.
     //sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:kDiosBaseUrl]];
-    sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:[BZConfig drupalServer]]];
+    sharedSession = [[self alloc] initWithBaseURL:[NSURL URLWithString:[[BZConfig sharedInstance] drupalServer]]];
       
     [sharedSession setParameterEncoding:AFJSONParameterEncoding];
   });
