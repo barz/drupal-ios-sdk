@@ -319,7 +319,7 @@ static NSUInteger USERNAME_MAX_LENGTH = 60;
 
 
 #pragma mark username validation
-+ (BOOL)userValidateUserName:(NSString*)name error:(NSError**)error
++ (BOOL)userValidateUserName:(NSString*)name error:(NSError* __autoreleasing *)error
 {
     NSMutableDictionary* details = [[NSMutableDictionary alloc]init];
     
@@ -357,7 +357,7 @@ static NSUInteger USERNAME_MAX_LENGTH = 60;
 }
 
 #pragma mark user email validation
-+ (BOOL)userValidateUserEmail:(NSString*)email error:(NSError**)error
++ (BOOL)userValidateUserEmail:(NSString*)email error:(NSError* __autoreleasing *)error
 {
     NSMutableDictionary* details = [[NSMutableDictionary alloc]init];
     
