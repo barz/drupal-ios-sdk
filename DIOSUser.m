@@ -341,7 +341,7 @@ static NSUInteger USERNAME_MAX_LENGTH = 60;
         [details setValue:@"The username can only conatain lower- and upper case characters, numbers and spaces." forKey:@"NSLocalizedRecoverySuggestion"];
     
     if(name.length > USERNAME_MAX_LENGTH)
-        [details setValue: [NSString stringWithFormat:@"The username %@ is too long: it must be %d characters or less.", name, USERNAME_MAX_LENGTH]  forKey:@"NSLocalizedRecoverySuggestion"];
+        [details setValue: [NSString stringWithFormat:@"The username %@ is too long: it must be %lu characters or less.", name, (unsigned long)USERNAME_MAX_LENGTH]  forKey:@"NSLocalizedRecoverySuggestion"];
     
     if([details objectForKey:@"NSLocalizedRecoverySuggestion"]) {
         
