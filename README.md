@@ -1,6 +1,6 @@
 Drupal iOS SDK - Connect your iOS/OS X app to Drupal
 ================================
-###[http://workhabit.com](http://workhabit.com)
+##### Sponsored by [http://workhabit.com](http://workhabit.com) built by [Kyle Browning](http://kylebrowning.com)
 What you need to know
 ================================
 The Drupal iOS SDK is a standard set of libraries for communicating to Drupal from any iOS device. Its extremely simple.
@@ -146,4 +146,4 @@ Use the issue queue here on github if you have questions. An addon library is [h
 Questions
 ----------
 Checkout the Issue queue, or email me
-Email kyle@workhabit.com
+Email kylebrowning@me.com
